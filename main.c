@@ -29,9 +29,11 @@ int main(){
     perror("fork fail");
     exit(1);
   } else if ( p == 0){
-      printf("pid: %d rand_num: %d\n", pid_var, num);
+      printf("%d %d seconds\n", pid_var, num);
+      sleep(num);
+      printf("%d finished after %d seconds", pid_var, num);
   }else{
-      
+      printf("not done\n");
   }
   return 0;
 }
