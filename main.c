@@ -28,12 +28,15 @@ int main(){
   if(p<0){
     perror("fork fail");
     exit(1);
-  } else if ( p == 0){
+  } else if (p == 0){
       printf("%d %d seconds\n", pid_var, num);
       sleep(num);
       printf("%d finished after %d seconds", pid_var, num);
   }else{
-      printf("not done\n");
+      printf("%d about to create 2 child processes\n", pid_var);
+      int * status;
+      wait(status);
+      printf("Main Process %d is done. Child %d slept for %d sec", pid_var, p, num);
   }
   return 0;
 }
