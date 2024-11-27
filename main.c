@@ -29,14 +29,27 @@ int main(){
     perror("fork fail");
     exit(1);
   } else if (p == 0){
-      printf("%d %d seconds\n", pid_var, num);
-      sleep(num);
-      printf("%d finished after %d seconds", pid_var, num);
+    int child_pid = getpid();
+    printf("%d %d seconds\n", child_pid, num);
+    sleep(num);
+    printf("%d finished after %d seconds\n", child_pid, num);
   }else{
-      printf("%d about to create 2 child processes\n", pid_var);
+    printf("%d about to create 2 child processes\n", pid_var);
+    pid_t t;
+    t = fork();
+    if(t < 0){
+      perror("fork fail");
+      exit(1);
+    } else if (t == 0){
+      int child_pid = getpid();
+      printf("%d %d seconds\n", child_pid, num);
+      sleep(num);
+      printf("%d finished after %d seconds\n", child_pid, num);
+    } else {
       int * status;
       wait(status);
-      printf("Main Process %d is done. Child %d slept for %d sec", pid_var, p, num);
+      printf("Main Process %d is done. Child %d slept for %d sec\n", pid_var, p, num);
+    }
   }
   return 0;
 }
