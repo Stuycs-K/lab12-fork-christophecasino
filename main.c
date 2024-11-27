@@ -33,8 +33,10 @@ int main(){
     printf("%d %d seconds\n", child_pid, num);
     sleep(num);
     printf("%d finished after %d seconds\n", child_pid, num);
+    exit(0);
   }else{
     printf("%d about to create 2 child processes\n", pid_var);
+    int num2 = rand_int();
     pid_t t;
     t = fork();
     if(t < 0){
@@ -42,15 +44,20 @@ int main(){
       exit(1);
     } else if (t == 0){
       int child_pid = getpid();
-      int num2 = rand_int();
       printf("%d %d seconds\n", child_pid, num2);
       sleep(num2);
       printf("%d finished after %d seconds\n", child_pid, num2);
+      exit(0);
     } else {
       int * status;
       wait(status);
       printf("Main Process %d is done. Child %d slept for %d sec\n", pid_var, p, num);
+      exit(0);
     }
+    int * status;
+    wait(status);
+    printf("Main Process %d is done. Child %d slept for %d sec\n", pid_var, t, num2);
+    exit(0);
   }
   return 0;
 }
