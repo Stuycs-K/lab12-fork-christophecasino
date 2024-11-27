@@ -42,9 +42,10 @@ int main(){
       exit(1);
     } else if (t == 0){
       int child_pid = getpid();
-      printf("%d %d seconds\n", child_pid, num);
-      sleep(num);
-      printf("%d finished after %d seconds\n", child_pid, num);
+      int num2 = rand_int();
+      printf("%d %d seconds\n", child_pid, num2);
+      sleep(num2);
+      printf("%d finished after %d seconds\n", child_pid, num2);
     } else {
       int * status;
       wait(status);
